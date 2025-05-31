@@ -1,4 +1,4 @@
-name: Deploy WordPress app to Azure Web App - wpluis1
+name: Desplegar
 
 on:
   push:
@@ -15,10 +15,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Zip artifact for deployment
+      - name: Comprimir para desplegar
         run: zip release.zip ./* -r
         
-      - name: Upload artifact for deployment job
+      - name: subir
         uses: actions/upload-artifact@v4
         with:
           name: wordpress-app
@@ -36,12 +36,12 @@ jobs:
         with:
           name: wordpress-app
 
-      - name: Unzip artifact for deployment
+      - name: descomprimir
         run: |
           unzip release.zip
           rm release.zip
 
-      - name: Deploy to Azure Web App
+      - name: desplegar
         uses: azure/webapps-deploy@v3
         with:
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
